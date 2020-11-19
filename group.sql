@@ -1,14 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- 主機： localhost:8889
--- 產生時間： 2020 年 11 月 19 日 12:33
--- 伺服器版本： 5.7.30
--- PHP 版本： 7.4.9
+-- 主機： 127.0.0.1
+-- 產生時間： 2020-11-19 14:16:19
+-- 伺服器版本： 10.4.14-MariaDB
+-- PHP 版本： 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- 資料庫： `group`
@@ -33,7 +40,7 @@ CREATE TABLE `apply` (
   `secretary_comment` varchar(100) DEFAULT NULL,
   `secretary_name` varchar(100) DEFAULT NULL,
   `principal_name` varchar(100) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
+  `status` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -41,8 +48,10 @@ CREATE TABLE `apply` (
 --
 
 INSERT INTO `apply` (`id`, `name`, `number`, `father`, `mother`, `type`, `teacher_comment`, `teacher_name`, `result`, `secretary_comment`, `secretary_name`, `principal_name`, `status`) VALUES
-(1, '何政賢', 106213015, '爸', '媽', '低收入戶', '導師的意見', '林書豪', '為低收入戶', '很可憐', '我是秘書', 'chen', 0),
-(3, '陳', 1062345, '王', '林', '中低收入戶', NULL, NULL, NULL, NULL, NULL, NULL, 0);
+(1, '何政賢', 106213015, '爸', '媽', '低收入戶', '導師的意見', '林書豪', '為低收入戶', '很可憐', '我是秘書', 'chen', '0'),
+(3, '陳', 1062345, '王', '林', '中低收入戶', NULL, NULL, NULL, NULL, NULL, NULL, '0'),
+(4, 'abc', 123, 'qwe', 'sd', '低收入戶', 'ret', 'rte', 'sdf', 'sdff', 'sfds', NULL, '結案'),
+(5, 'zxc', 343, 'sgf', 'fgdf', '低收入戶', NULL, NULL, NULL, NULL, NULL, NULL, '待審核');
 
 -- --------------------------------------------------------
 
@@ -90,10 +99,15 @@ ALTER TABLE `user`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `apply`
 --
 ALTER TABLE `apply`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
