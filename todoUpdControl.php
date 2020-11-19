@@ -1,13 +1,15 @@
 <?php
 require("todoModel.php");
 
-$title=mysqli_real_escape_string($conn,$_POST['title']);//取得表單資訊
-$msg=mysqli_real_escape_string($conn,$_POST['msg']);
-$id=(int)$_POST['id'];
-$urgent=mysqli_real_escape_string($conn,$_POST['urgent']);
+$name=mysqli_real_escape_string($conn,$_POST['name']);//取得表單資訊
+$number=mysqli_real_escape_string($conn,$_POST['number']);
+$father=mysqli_real_escape_string($conn,$_POST['father']);
+$mother=mysqli_real_escape_string($conn,$_POST['mother']);
+$type=mysqli_real_escape_string($conn,$_POST['type']);
 
-if ($title) { //if title is not empty
-	updateJob($id,$title,$msg, $urgent);
+
+if ($name) { //if title is not empty
+	addJob($name, $number,$father,$mother,$type);
 	$msg="Message updateded";
 } else {
 	$msg= "Message title cannot be empty";

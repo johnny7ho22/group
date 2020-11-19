@@ -1,8 +1,10 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']!="boss") {
+if (! isset($_SESSION['uID']) or $_SESSION['uID']!="student")
+{
 	header("Location: loginForm.php");
 } 
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,7 +22,10 @@ if (! isset($_SESSION['uID']) or $_SESSION['uID']!="boss") {
 五、本要點補助之貧困學不得與其他民間團體、政府機關等重複補助；如同時有二個以上單位提供補助，經查重複者應予繳回。<br>
 六、學校導師應主動進行家庭訪問，協助急困學生解決問題。<br>
 七、本要點自發布日實施。<br>
+<br/>
 <form method="post" action="todoUpdControl.php">
+
+
 
       申請人: <input name="name" type="text" id="name"  /> <br>
 
@@ -40,7 +45,7 @@ if (! isset($_SESSION['uID']) or $_SESSION['uID']!="boss") {
       <input type="submit" name="Submit" value="送出" />
 	</form>
 	<br>
-	<a href="todoList.php">查詢申請狀態</a>
+	<!-- <a href="todoList.php">查詢申請狀態</a> -->
   </tr>
 </table>
 </body>

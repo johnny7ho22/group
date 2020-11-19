@@ -3,29 +3,32 @@ session_start();
 if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 	header("Location: loginForm.php");
 }
-if ($_SESSION['uID']=='student'){
+if ($_SESSION['uID']=='student')
+{
 	$bossMode = 0; //如果是boss，bossMode設1
 }
-if ($_SESSION['uID']=='teacher'){
+else if ($_SESSION['uID']=='teacher')
+{
 	$bossMode = 1;
 }
-if ($_SESSION['uID']=='secretary'){
+else if ($_SESSION['uID']=='secretary')
+{
 	$bossMode = 2;
 }
 else { // 校長身分
-	$bossMode=3;//如果是員工則為0
+	$bossMode=3;
 }
 require("todoModel.php");
-if (isset($_GET['m'])){
-	$msg="<font color='red'>" . $_GET['m'] . "</font>";
-} else {
-	$msg="Good morning";
-}
+// if (isset($_GET['m'])){
+// 	$msg="<font color='red'>" . $_GET['m'] . "</font>";
+// } else {
+// 	$msg="Good morning";
+// }
 
 
 
 $result=getJobList($bossMode);//取得所有工作清單
-$jobStatus = array('未完成','已完成','已結案','已取消'); //自己設的array
+// $jobStatus = array('未完成','已完成','已結案','已取消'); //自己設的array
 
 
 ?>
@@ -41,7 +44,7 @@ $jobStatus = array('未完成','已完成','已結案','已取消'); //自己設
 <p>my Todo List !! </p>
 <hr />
 <div><?php echo $msg; ?></div><hr>
-<a href="loginForm.php">login</a> | <a href="todoEditForm.php?id=-1">Apply</a> <br>
+<a href="loginForm.php">login</a> | <a href="todoEditForm.php">申請補助</a> <br>
 <?php
 // if($bossMode == 0){ // 學生頁面
 //     header("Location: todoEditForm.php");
@@ -60,6 +63,7 @@ $jobStatus = array('未完成','已完成','已結案','已取消'); //自己設
 
 <table width="200" border="1">
   <tr>
+	<td>流水號</td>
     <td>申請人</td>
     <td>學號</td>
     <td>父親名字</td>
@@ -76,29 +80,9 @@ $jobStatus = array('未完成','已完成','已結案','已取消'); //自己設
   </tr>
 <?php
 
-while (	$rs=mysqli_fetch_assoc($result)) {
-	// switch($rs['urgent']) {
-	// 	case '緊急':
-	// 		$bgColor="#ff9999"; //依據緊急條件設定表格顏色
-	// 		$timeLimit = 60; //設定時間限制
-	// 		break;
-	// 	case '重要':
-	// 		$bgColor="#99ff99";
-	// 		$timeLimit = 120;
-	// 		break;
-	// 	default:
-	// 		$bgColor="#ffffff";
-	// 		$timeLimit = 180;
-	// 		break;
-	// }
-
-	// if ($rs['diff']>$timeLimit) {
-	// 	$fontColor="red";  //如果超過時間限制，字體變紅色
-	// } else {
-	// 	$fontColor="black";    //否則為黑
-	// }
-
-	echo "<tr style='background-color:$bgColor;'><td>" . $rs['id'] . "</td>";
+while (	$rs=mysqli_fetch_assoc($result)) 
+{
+	echo "<tr><td>" . $rs['id'] . "</td>";
 	echo "<td>{$rs['name']}</td>";
 	echo "<td>{$rs['number']}</td>";
 	echo "<td>{$rs['father']}</td>";
@@ -107,11 +91,44 @@ while (	$rs=mysqli_fetch_assoc($result)) {
 	echo "<td>{$rs['teacher_comment']}</td>";
 	echo "<td>{$rs['teacher_name']}</td>";
 	echo "<td>{$rs['result']}</td>";
-	echo "<td>{$rs['teacher_name']}</td>";
 	echo "<td>{$rs['secretary_comment']}</td>";
 	echo "<td>{$rs['secretary_name']}</td>";
 	echo "<td>{$rs['principal_name']}</td>";
 	echo "<td>{$rs['status']}</td>";
+	switch($bossMode)
+	{
+		case 0: //當為學生
+			
+			break;
+		case 1://當為老師	
+			echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>老師確認</a></td></tr>";	
+			break;
+		case 2://當為秘書
+			echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>秘書確認</a></td></tr>";	
+			break;
+		case 3://當為校長
+			echo "<td><a href='UpdatePrincipalConfirm.php?act=finish&id={$rs['id']}'>結案</a>  ";
+			echo "-";
+			echo "<a href='UpdatePrincipalConfirm.php?act=reject&id={$rs['id']}'>否決</a></td></tr>  ";//員工的部分
+		break;
+		default:
+			break;
+	}
+}
+	// echo "<tr style='background-color:$bgColor;'><td>" . $rs['id'] . "</td>";
+	// echo "<td>{$rs['name']}</td>";
+	// echo "<td>{$rs['number']}</td>";
+	// echo "<td>{$rs['father']}</td>";
+	// echo "<td>{$rs['mother']}</td>";
+	// echo "<td>{$rs['type']}</td>";
+	// echo "<td>{$rs['teacher_comment']}</td>";
+	// echo "<td>{$rs['teacher_name']}</td>";
+	// echo "<td>{$rs['result']}</td>";
+	// echo "<td>{$rs['teacher_name']}</td>";
+	// echo "<td>{$rs['secretary_comment']}</td>";
+	// echo "<td>{$rs['secretary_name']}</td>";
+	// echo "<td>{$rs['principal_name']}</td>";
+	// echo "<td>{$rs['status']}</td>";
 
     // echo "<tr style='background-color:$bgColor;'><td>" . $rs['id'] . "</td>";
 	// echo "<td>{$rs['title']}</td>";
@@ -137,54 +154,54 @@ while (	$rs=mysqli_fetch_assoc($result)) {
 	// 		break;
     // }
     // 核決或否決
-    switch($rs['status']) {
+    // switch($rs['status']) {
         // 學生尚未填寫表單
-        case 0:
-			if($bossMode == 0) {
-                echo "<td><a href='todoEditForm.php?id={$rs['id']}'>Apply</a></td>";
-            }
-            break;
+        // case 0:
+		// 	if($bossMode == 0) {
+        //         echo "<td><a href='todoEditForm.php?id={$rs['id']}'>Apply</a></td>";
+        //     }
+        //     break;
         // 導師審核中
-        case 1:
+        // case 1:
             // 學生可以查看目前狀態
-            if($bossMode == 0){
+            // if($bossMode == 0){
                 // 還沒做
-                echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
-            }
+                // echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
             // 老師進行填寫意見與簽章
-            if($bossMode == 1){
-                echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
-            }
-            break;
+            // if($bossMode == 1){
+            //     echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
+            // }
+            // break;
         // 秘書審核中
-        case 2:
+        // case 2:
             // 學生可以查看目前狀態
-            if($bossMode == 0){
-                // 還沒做
-                echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
-            }
+            // if($bossMode == 0){
+            //     // 還沒做
+            //     echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
+            // }
             // 秘書進行審核與簽章
-            if ($bossMode == 2){
-                echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>Check</a></td>";
-            }
-            break;
+            // if ($bossMode == 2){
+            //     echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>Check</a></td>";
+            // }
+            // break;
         // 校長審核中
-        case 3:
+        // case 3:
             // 學生可以查看目前狀態
-            if($bossMode == 0){
+            // if($bossMode == 0){
                 // 還沒做
-                echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
-            }
+                // echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
+            // }
             // 校長進行核決(簽章)
-            if ($bossMode == 3){
-                echo "<td><a href='todoPrincipalForm.php?id={$rs['id']}'>Decide</a></td></tr>";
-            }
-            break;
-        default:
-            break;
-    }
-    echo "</td></tr>";
-}
+        //     if ($bossMode == 3){
+        //         echo "<td><a href='todoPrincipalForm.php?id={$rs['id']}'>Decide</a></td></tr>";
+        //     }
+        //     break;
+        // default:
+        //     break;
+    // }
+	// echo "</td></tr>";
+// }		
+
 ?>
 </table>
 </body>
