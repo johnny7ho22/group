@@ -107,7 +107,7 @@ while (	$rs=mysqli_fetch_assoc($result))
 			echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>秘書確認</a></td></tr>";	
 			break;
 		case 3://當為校長
-			echo "<td><a href='UpdatePrincipalConfirm.php?act=finish&id={$rs['id']}'>結案</a>  ";
+			echo "<td><a href='UpdatePrincipalConfirm.php?act=finish&id={$rs['id']}'>決行</a>  ";
 			echo "-";
 			echo "<a href='UpdatePrincipalConfirm.php?act=reject&id={$rs['id']}'>否決</a></td></tr>  ";//員工的部分
 		break;
