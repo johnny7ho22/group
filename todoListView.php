@@ -72,6 +72,7 @@ $jobStatus = array('未完成','已完成','已結案','已取消'); //自己設
     <td>秘書簽章</td>
     <td>校長核章</td>
     <td>狀態</td>
+    <td>-</td>
   </tr>
 <?php
 
@@ -110,7 +111,7 @@ while (	$rs=mysqli_fetch_assoc($result)) {
 	echo "<td>{$rs['secretary_comment']}</td>";
 	echo "<td>{$rs['secretary_name']}</td>";
 	echo "<td>{$rs['principal_name']}</td>";
-	echo "<td>{$rs['status']}</td></tr>";
+	echo "<td>{$rs['status']}</td>";
 
     // echo "<tr style='background-color:$bgColor;'><td>" . $rs['id'] . "</td>";
 	// echo "<td>{$rs['title']}</td>";
@@ -140,7 +141,7 @@ while (	$rs=mysqli_fetch_assoc($result)) {
         // 學生尚未填寫表單
         case 0:
 			if($bossMode == 0) {
-                echo "<a href='todoEditForm.php?id={$rs['id']}'>Apply</a>";
+                echo "<td><a href='todoEditForm.php?id={$rs['id']}'>Apply</a></td>";
             }
             break;
         // 導師審核中
@@ -148,11 +149,11 @@ while (	$rs=mysqli_fetch_assoc($result)) {
             // 學生可以查看目前狀態
             if($bossMode == 0){
                 // 還沒做
-                echo "<a href='todoTeacherForm.php?id={$rs['id']}'>Check</a>";
+                echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
             }
             // 老師進行填寫意見與簽章
             if($bossMode == 1){
-                echo "<a href='todoTeacherForm.php?id={$rs['id']}'>Check</a>";
+                echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
             }
             break;
         // 秘書審核中
@@ -160,11 +161,11 @@ while (	$rs=mysqli_fetch_assoc($result)) {
             // 學生可以查看目前狀態
             if($bossMode == 0){
                 // 還沒做
-                echo "<a href='todoTeacherForm.php?id={$rs['id']}'>Check</a>";
+                echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
             }
             // 秘書進行審核與簽章
             if ($bossMode == 2){
-                echo "<a href='todoSecretaryForm.php?id={$rs['id']}'>Check</a>";
+                echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>Check</a></td>";
             }
             break;
         // 校長審核中
@@ -172,11 +173,11 @@ while (	$rs=mysqli_fetch_assoc($result)) {
             // 學生可以查看目前狀態
             if($bossMode == 0){
                 // 還沒做
-                echo "<a href='todoTeacherForm.php?id={$rs['id']}'>Check</a>";
+                echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>Check</a></td>";
             }
             // 校長進行核決(簽章)
             if ($bossMode == 3){
-                echo "<a href='todoPrincipalForm.php?id={$rs['id']}'>Decide</a>";
+                echo "<td><a href='todoPrincipalForm.php?id={$rs['id']}'>Decide</a></td></tr>";
             }
             break;
         default:
