@@ -100,16 +100,22 @@ while (	$rs=mysqli_fetch_assoc($result))
 		case 0: //當為學生
 			
 			break;
-		case 1://當為老師	
-			echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>老師確認</a></td></tr>";	
-			break;
+		case 1://當為老師
+			if($rs['status']=='待審核'){
+				echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>老師確認</a></td></tr>";	
+				break;
+			}
 		case 2://當為秘書
-			echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>秘書確認</a></td></tr>";	
-			break;
+			if($rs['status']=='老師確認'){
+				echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>秘書確認</a></td></tr>";	
+				break;
+			}
 		case 3://當為校長
-			echo "<td><a href='UpdatePrincipalConfirm.php?act=finish&id={$rs['id']}'>決行</a>  ";
-			echo "-";
-			echo "<a href='UpdatePrincipalConfirm.php?act=reject&id={$rs['id']}'>否決</a></td></tr>  ";//員工的部分
+			if($rs['status']=='秘書確認'){
+				echo "<td><a href='UpdatePrincipalConfirm.php?act=finish&id={$rs['id']}'>決行</a>  ";
+				echo "-";
+				echo "<a href='UpdatePrincipalConfirm.php?act=reject&id={$rs['id']}'>否決</a></td></tr>  ";
+			}
 		break;
 		default:
 			break;
