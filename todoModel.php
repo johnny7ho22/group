@@ -1,11 +1,54 @@
 <?php
 require_once("dbconnect.php");
 
-function addJob($title,$msg, $urgent) {
+//	$sql = "insert into apply (name, number,father, mother,type,teacher_comment,teacher_name,result,secretary_comment,secretary_name,principal_name) values ('$name','$number', '$father','$mother', '$type','$teacher_comment', '$teacher_name','$result', '$secretary_comment','$secretary_name', '$principal_name');";
+
+
+function add_student_Job($name,$number, $father,$mother,$type) {
 	global $conn;
-	$sql = "insert into todo (title, content,urgent, addTime, status) values ('$title','$msg', '$urgent', NOW(),0);";
+		$sql = "insert into apply (name, number,father, mother,type,status) values ('$name','$number', '$father','$mother', '$type','1');";
+	// else if($bossMode == 1)
+	// {
+	// 	$sql = "insert into apply (teacher_comment,teacher_name) values ('$teacher_comment', '$teacher_name');";
+
+	// }
+	// else if($bossMode == 2)
+	// {
+	// 	$sql = "insert into apply (result,secretary_comment,secretary_name,principal_name) values ('$result', '$secretary_comment','$secretary_name');";
+	// }
+	// else
+	// {
+
+	// }
+	// $sql = "insert into apply (name, number,father, mother,type,teacher_comment,teacher_name,result,secretary_comment,secretary_name,principal_name) values ('$name','$number', '$father','$mother', '$type','$teacher_comment', '$teacher_name','$result', '$secretary_comment','$secretary_name', '$principal_name');";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
+
+
+
+
+function add_teacher_Job($teacher_comment,$teacher_name) {
+	global $conn;
+
+		$sql = "insert into apply (teacher_comment,teacher_name) values ('$teacher_comment', '$teacher_name');";
+
+	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
+}
+
+
+function add_secretary_Job($result,$secretary_comment,$secretary_name) {
+	global $conn;
+	$sql = "insert into apply (result,secretary_comment,secretary_name) values ('$result', '$secretary_comment','$secretary_name');";
+	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
+}
+
+function add_principal_Job($principal_name) {
+	global $conn;
+	$sql = "insert into apply (principal_name) values ('$principal_name');";
+	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
+}
+
+
 
 function cancelJob($jobID) {
 	global $conn;
@@ -14,15 +57,16 @@ function cancelJob($jobID) {
 	//return T/F
 }
 
-function updateJob($id,$title,$msg, $urgent) {//更改清單(可新增、或修改)
-	global $conn;
-	if ($id== -1) { //id設-1代表是要新增工作
-		addJob($title,$msg, $urgent);
-	} else {
-		$sql = "update todo set title='$title', content='$msg', urgent='$urgent' where id=$id;";//若id為-1以外的話，就是要更新工作內容，而不是新增工作
-		mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
-	}
-}
+
+
+
+
+
+
+
+
+
+
 
 function getJobList($bossMode) {
 	global $conn;
