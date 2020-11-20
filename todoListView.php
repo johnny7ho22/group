@@ -35,16 +35,21 @@ $result=getJobList($bossMode);//取得所有工作清單
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<style>
+    h1 {text-align: center;}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>無標題文件</title>
+<title>補助貧困學生申請系統</title>
 </head>
 
 <body>
 
-<p>my Todo List !! </p>
-<hr />
-<div><?php echo $msg; ?></div><hr>
-<a href="loginForm.php">login</a> | <a href="todoEditForm.php">申請補助</a> <br>
+<h1>補助貧困學生申請系統</h1>
+<!-- <div>
+
+</div><hr> -->
+
+
 <?php
 // if($bossMode == 0){ // 學生頁面
 //     header("Location: todoEditForm.php");
@@ -61,7 +66,7 @@ $result=getJobList($bossMode);//取得所有工作清單
 ?>
 
 
-<table width="200" border="1">
+<table width="1250" border="5">
   <tr>
 	<td>流水號</td>
     <td>申請人</td>
@@ -74,13 +79,13 @@ $result=getJobList($bossMode);//取得所有工作清單
 	<td>秘書審核結果</td>
 	<td>秘書審核意見</td>
     <td>秘書簽章</td>
-    <td>校長核章</td>
+    <!-- <td>校長核章</td> -->
     <td>狀態</td>
-    <td>-</td>
+    <td>等待執行動作</td>
   </tr>
 <?php
 
-while (	$rs=mysqli_fetch_assoc($result)) 
+while (	$rs=mysqli_fetch_assoc($result))
 {
 	echo "<tr><td>" . $rs['id'] . "</td>";
 	echo "<td>{$rs['name']}</td>";
@@ -93,23 +98,21 @@ while (	$rs=mysqli_fetch_assoc($result))
 	echo "<td>{$rs['result']}</td>";
 	echo "<td>{$rs['secretary_comment']}</td>";
 	echo "<td>{$rs['secretary_name']}</td>";
-	echo "<td>{$rs['principal_name']}</td>";
+	// echo "<td>{$rs['principal_name']}</td>";
 	echo "<td>{$rs['status']}</td>";
 	switch($bossMode)
 	{
 		case 0: //當為學生
-			
 			break;
 		case 1://當為老師
 			if($rs['status']=='待審核'&&$bossMode == 1 ){
-				echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>導師確認</a></td></tr>";	
+				echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>導師確認</a></td></tr>";
 				break;
 			}
 		case 2://當為秘書
 			if($rs['status']=='導師已審核'&&$bossMode == 2){
-				echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>秘書確認</a></td></tr>";	
+				echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>秘書確認</a></td></tr>";
 				break;
-			
 			}
 		case 3://當為校長
 			if($rs['status']=='秘書已審核'&&$bossMode == 3){
@@ -207,9 +210,10 @@ while (	$rs=mysqli_fetch_assoc($result))
         //     break;
     // }
 	// echo "</td></tr>";
-// }		
+// }
 
 ?>
 </table>
+<a href="loginForm.php">切換腳色</a> | <a href="todoEditForm.php">我要申請補助!</a> <br>
 </body>
 </html>
