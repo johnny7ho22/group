@@ -72,15 +72,17 @@ function getJobDetail($id) { //取得工作內容細項需要id
 
 function setFinished($id) { //將工作設為已完成(0-->1)
 	global $conn;
-	$sql = "update apply set status = '結案' where id=$id;";
+	$sql = "update apply set principal_name = '核決' where id=$id;";
 	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
-	
+	$sql = "update apply set status = '結案' where id=$id;";
 }
 
 function rejectJob($id){ //撤回工作，從已完成改成未完成(1-->0)
 	global $conn;
 	$sql = "update apply set status = '否決' where id=$id;";
 	mysqli_query($conn,$sql);
+	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
+	$sql = "update apply set status = '結案' where id=$id;";
 }
 
 //function setClosed($jobID) {//已完成改已結案(1-->2)
