@@ -102,7 +102,7 @@ while (	$rs=mysqli_fetch_assoc($result))
 			break;
 		case 1://當為老師
 			if($rs['status']=='待審核'&&$bossMode == 1 ){
-				echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>老師確認</a></td></tr>";	
+				echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>導師確認</a></td></tr>";	
 				break;
 			}
 		case 2://當為秘書
