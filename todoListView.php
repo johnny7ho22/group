@@ -101,17 +101,18 @@ while (	$rs=mysqli_fetch_assoc($result))
 			
 			break;
 		case 1://當為老師
-			if($rs['status']=='待審核'){
+			if($rs['status']=='待審核'&&$bossMode == 1 ){
 				echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>老師確認</a></td></tr>";	
 				break;
 			}
 		case 2://當為秘書
-			if($rs['status']=='老師確認'){
+			if($rs['status']=='導師已審核'&&$bossMode == 2){
 				echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>秘書確認</a></td></tr>";	
 				break;
+			
 			}
 		case 3://當為校長
-			if($rs['status']=='秘書確認'){
+			if($rs['status']=='秘書已審核'&&$bossMode == 3){
 				echo "<td><a href='UpdatePrincipalConfirm.php?act=finish&id={$rs['id']}'>決行</a>  ";
 				echo "-";
 				echo "<a href='UpdatePrincipalConfirm.php?act=reject&id={$rs['id']}'>否決</a></td></tr>  ";
