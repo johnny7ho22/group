@@ -1,9 +1,9 @@
 <?php
 require_once("dbconnect.php");
 
-function addJob($name, $number,$father,$mother,$type) {
+function addJob($name, $number,$father,$mother,$type,$status) {
 	global $conn;
-	$sql = "insert into apply (name, number, father,mother,type,status) values ('$name', '$number','$father','$mother','$type','待審核');"; //新增一筆資料
+	$sql = "insert into apply (name, number, father,mother,type,status) values ('$name', '$number','$father','$mother','$type','$status');"; //新增一筆資料
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
@@ -17,7 +17,7 @@ function cancelJob($jobID) {
 function teacher_confirm($id,$teacher_comment,$teacher_name) 
 {
 	global $conn;
-	$sql = "update apply set teacher_comment = '$teacher_comment', teacher_name = '$teacher_name' ,status = '導師已審核' where id=$id and status = '待審核';";
+	$sql = "update apply set teacher_comment = '$teacher_comment', teacher_name = '$teacher_name' ,status = '導師已審核' where id=$id;";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
 }
 
@@ -25,7 +25,7 @@ function teacher_confirm($id,$teacher_comment,$teacher_name)
 function secretary_confirm($id,$result,$secretary_comment,$secretary_name) 
 {
 	global $conn;
-	$sql = "update apply set result = '$result',  secretary_comment = '$secretary_comment', secretary_name = '$secretary_name',status = '秘書已審核' where id=$id and status = '導師已審核';";
+	$sql = "update apply set result = '$result',  secretary_comment = '$secretary_comment', secretary_name = '$secretary_name',status = '秘書已審核' where id=$id;";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
 }
 
@@ -72,22 +72,22 @@ function getJobDetail($id) { //取得工作內容細項需要id
 
 function setFinished($id) { //將工作設為已完成(0-->1)
 	global $conn;
-	$sql = "update apply set status = '結案'  where id=$id and status = '秘書已審核' ;";
+	$sql = "update apply set status = '結案' where id=$id;";
 	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
 	
 }
 
 function rejectJob($id){ //撤回工作，從已完成改成未完成(1-->0)
 	global $conn;
-	$sql = "update apply set status = '否決' where id=$id and status = '秘書已審核';";
+	$sql = "update apply set status = '否決' where id=$id;";
 	mysqli_query($conn,$sql);
 }
 
-function setClosed($jobID) {//已完成改已結案(1-->2)
-	global $conn;
-	$sql = "update todo set status = 2 where id=$jobID and status = 1;";
-	mysqli_query($conn,$sql);
-}
+//function setClosed($jobID) {//已完成改已結案(1-->2)
+	//global $conn;
+	//$sql = "update todo set status = '結案' where id=$jobID and status = 1;";
+	//mysqli_query($conn,$sql);
+//}
 
 
 ?>
