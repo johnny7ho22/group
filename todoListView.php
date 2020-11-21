@@ -79,12 +79,11 @@ $result=getJobList($bossMode);//取得所有工作清單
         <td>秘書審核結果</td>
 	<td>秘書審核意見</td>
     <td>秘書簽章</td>
-    <td>校長核定</td>
+    <!--<td>校長核定</td>-->
     <td>狀態</td>
     <td>等待執行動作</td>
 </tr>
 <?php
-
 while (	$rs=mysqli_fetch_assoc($result))
 {
 	echo "<tr><td>" . $rs['id'] . "</td>";
@@ -98,7 +97,7 @@ while (	$rs=mysqli_fetch_assoc($result))
 	echo "<td>{$rs['result']}</td>";
 	echo "<td>{$rs['secretary_comment']}</td>";
 	echo "<td>{$rs['secretary_name']}</td>";
-	echo "<td>{$rs['principal_name']}</td>";
+	//echo "<td>{$rs['principal_name']}</td>";
 	echo "<td>{$rs['status']}</td>";
 	switch($bossMode)
 	{
@@ -117,7 +116,7 @@ while (	$rs=mysqli_fetch_assoc($result))
 		case 3://當為校長
 			if($rs['status']=='秘書已審核'&&$bossMode == 3){
 				echo "<td><a href='UpdatePrincipalConfirm.php?act=finish&id={$rs['id']}'>核決</a>  ";
-				echo "-";
+				echo "/";
 				echo "<a href='UpdatePrincipalConfirm.php?act=reject&id={$rs['id']}'>否決</a></td></tr>  ";
 			}
 		break;

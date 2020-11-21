@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']!="boss") {
+if (! isset($_SESSION['uID']) or $_SESSION['uID']!="student") {
 	header("Location: loginForm.php");
 }
 ?>
@@ -44,7 +44,8 @@ if (! isset($_SESSION['uID']) or $_SESSION['uID']!="boss") {
       <input type="submit" name="Submit" value="送出" />
 	</form>
 	<br>
-	<a href="todoList.php">查詢申請狀態</a>
+	<a href="todoListView.php">Back
+	<!--<a href="todoList.php">查詢申請狀態</a>-->	
   </tr>
 </table>
 </body>
