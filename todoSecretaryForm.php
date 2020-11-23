@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']!="2") {
+if (! isset($_SESSION['uID']) or $_SESSION['role']!="2") {
 	header("Location: loginForm.php");
 }
 
