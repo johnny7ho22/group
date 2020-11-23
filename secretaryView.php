@@ -2,7 +2,7 @@
 session_start();
 require("todoModel.php");
 $bossMode=2;
-$result=getJobList($bossMode);//取得所有工作清單
+$result=getJobList($bossMode, $_SESSION['uID']);//取得所有工作清單
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -36,7 +36,6 @@ $result=getJobList($bossMode);//取得所有工作清單
         <td>秘書審核結果</td>
 	    <td>秘書審核意見</td>
         <td>秘書簽章</td>
-    <!--<td>校長核定</td>-->
         <td>狀態</td>
         <td>等待執行動作</td>
 </tr>
@@ -54,7 +53,6 @@ while (	$rs=mysqli_fetch_assoc($result))
 	echo "<td>{$rs['result']}</td>";
 	echo "<td>{$rs['secretary_comment']}</td>";
 	echo "<td>{$rs['secretary_name']}</td>";
-	//echo "<td>{$rs['principal_name']}</td>";
 	echo "<td>{$rs['status']}</td>";
 	switch($bossMode)
 	{
@@ -64,12 +62,12 @@ while (	$rs=mysqli_fetch_assoc($result))
                 if($rs['status']=='待審核'&&$bossMode == 1 ){
                     echo "<td><a href='todoTeacherForm.php?id={$rs['id']}'>導師確認</a></td></tr>";
                     break;
-			}
+            }
             case 2://當為秘書
-			if($rs['status']=='導師已審核'&&$bossMode == 2){
-				echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>秘書確認</a></td></tr>";
-				break;
-			}
+            if($rs['status']=='導師已審核'&&$bossMode == 2){
+                echo "<td><a href='todoSecretaryForm.php?id={$rs['id']}'>秘書確認</a></td></tr>";
+                break;
+            }
 		case 3://當為校長
 			if($rs['status']=='秘書已審核'&&$bossMode == 3){
 				echo "<td><a href='UpdatePrincipalConfirm.php?act=finish&id={$rs['id']}'>核決</a>  ";

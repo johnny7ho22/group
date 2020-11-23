@@ -22,11 +22,12 @@ function checkUserIDPwd($userName, $passWord) {
 
 
 
-function getUserPwd() { //取得User的帳號密碼(不安全)
+function getUserRole($name) { //取得User的帳號密碼(不安全)
 	global $conn;
-	$sql = "select * from user;";
-	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
-	return $result;
+	$sql = "SELECT role FROM user WHERE LoginID='$name';";
+	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot get role.");
+	$result=mysqli_fetch_assoc($result);
+	return $result['role'];
 }
 
 function setUserPassword($userName){

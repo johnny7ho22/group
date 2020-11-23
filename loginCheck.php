@@ -7,6 +7,7 @@ $passWord = $_POST['pwd'];
 
 if (checkUserIDPwd($userName, $passWord)) {//checkUserIDPwd為True的話
 	$_SESSION['uID'] = $userName;
+	$_SESSION['role'] = getUserRole($userName);
 	header("Location: todoListView.php");//跳到清單首頁
 } else {
 	$_SESSION['uID']="";

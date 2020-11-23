@@ -2,7 +2,7 @@
 session_start();
 require("todoModel.php");
 $bossMode=3;
-$result=getJobList($bossMode);//取得所有工作清單
+$result=getJobList($bossMode, $_SESSION['uID']);//取得所有工作清單
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

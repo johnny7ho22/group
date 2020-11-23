@@ -2,7 +2,7 @@
 session_start();
 require("todoModel.php");
 $bossMode=0;
-$result=getJobList($bossMode);//取得所有工作清單
+$result=getJobList($bossMode, $_SESSION['uID']);//取得所有工作清單
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -31,14 +31,7 @@ $result=getJobList($bossMode);//取得所有工作清單
         <td>父親名字</td>
         <td>母親名字</td>
         <td>申請補助種類</td>
-        <!-- <td>導師訪視說明</td> -->
-        <!-- <td>導師簽章</td> -->
-        <!-- <td>秘書審核結果</td> -->
-	<!-- <td>秘書審核意見</td> -->
-    <!-- <td>秘書簽章</td> -->
-    <!--<td>校長核定</td>-->
-    <td>狀態</td>
-    <!-- <td>等待執行動作</td> -->
+        <td>狀態</td>
 </tr>
 <?php
 while (	$rs=mysqli_fetch_assoc($result))
@@ -49,12 +42,6 @@ while (	$rs=mysqli_fetch_assoc($result))
 	echo "<td>{$rs['father']}</td>";
 	echo "<td>{$rs['mother']}</td>";
 	echo "<td>{$rs['type']}</td>";
-	// echo "<td>{$rs['teacher_comment']}</td>";
-	// echo "<td>{$rs['teacher_name']}</td>";
-	// echo "<td>{$rs['result']}</td>";
-	// echo "<td>{$rs['secretary_comment']}</td>";
-	// echo "<td>{$rs['secretary_name']}</td>";
-	//echo "<td>{$rs['principal_name']}</td>";
 	echo "<td>{$rs['status']}</td>";
 	switch($bossMode)
 	{
@@ -85,4 +72,5 @@ while (	$rs=mysqli_fetch_assoc($result))
 </table>
 <p>
     <a style="text-align:center" href="todoEditForm.php">我要申請補助!</a> <br><a style="text-align:right" href="loginForm.php">登出</a> <br>
+</body>
 </html>

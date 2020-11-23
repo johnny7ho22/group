@@ -29,11 +29,11 @@ function secretary_confirm($id,$result,$secretary_comment,$secretary_name)
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
 }
 
-function getJobList($bossMode) {
+function getJobList($bossMode, $username) {
 	global $conn;
 	if ($bossMode == 0)
 	{
-		$sql = "select id, name, number, father, mother, type,status from apply;";
+		$sql = "SELECT id, name, number, father, mother, type, status FROM apply WHERE name = '$username';";
 	}
 	else if($bossMode == 1)
 	{

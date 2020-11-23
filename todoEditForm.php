@@ -26,7 +26,7 @@ if (! isset($_SESSION['uID']) or $_SESSION['uID']!="student") {
 七、本要點自發布日實施。<br></p>
 <form method="post" action="todoUpdControl.php">
 
-      申請人: <input name="name" type="text" id="name"  /> <br>
+      申請人: <input name="name" type="$username" id="name"/> <br>
 
       學號: <input name="number" type="text" id="number"  /> <br>
 
@@ -34,7 +34,7 @@ if (! isset($_SESSION['uID']) or $_SESSION['uID']!="student") {
 
 	  母親姓名: <input name="mother" type="text" id="mother" /> <br>
 
-	  申請補助種類: <select  name="type" type="select" id="type" />
+	  申請補助種類: <select  name="type" type="select" id="type"/>
 					<option value='低收入戶'>低收入戶</option>
 					<option value='中低收入戶'>中低收入戶</option>
 					<option value='家庭突發因素'>家庭突發因素</option>

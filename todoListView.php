@@ -3,17 +3,17 @@ session_start();
 if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 	header("Location: loginForm.php");
 }
-if ($_SESSION['uID']=='student')
+if ($_SESSION['role'] == 0)
 {
     $bossMode = 0;
     header("Location: studentView.php");
 }
-else if ($_SESSION['uID']=='teacher')
+else if ($_SESSION['role'] == 1)
 {
     $bossMode = 1;
     header("Location: teacherView.php");
 }
-else if ($_SESSION['uID']=='secretary')
+else if ($_SESSION['role'] == 2)
 {
     $bossMode = 2;
     header("Location: secretaryView.php");
