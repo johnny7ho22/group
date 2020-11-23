@@ -18,6 +18,6 @@ if ($msgID>0) {
 			break;
 	}
 }
-header("Location: todoListView.php?m=$msg"); //跳轉到Todolist顯示m訊息
+header("Location: pricipalView.php?m=$msg"); //跳轉到Todolist顯示m訊息
 ?>
 

@@ -29,9 +29,9 @@ if (! isset($_SESSION['uID']) or $_SESSION['uID']!="student") {
       申請人: <input name="name" type="text" id="name"  /> <br>
 
       學號: <input name="number" type="text" id="number"  /> <br>
-	  
+
 	  父親姓名: <input name="father" type="text" id="father"  /> <br>
-	  
+
 	  母親姓名: <input name="mother" type="text" id="mother" /> <br>
 
 	  申請補助種類: <select  name="type" type="select" id="type" />
@@ -44,8 +44,8 @@ if (! isset($_SESSION['uID']) or $_SESSION['uID']!="student") {
       <input type="submit" name="Submit" value="送出" />
 	</form>
 	<br>
-	<a href="todoListView.php">Back
-	<!--<a href="todoList.php">查詢申請狀態</a>-->	
+	<a href="studentView.php">Back
+	<!--<a href="todoList.php">查詢申請狀態</a>-->
   </tr>
 </table>
 </body>

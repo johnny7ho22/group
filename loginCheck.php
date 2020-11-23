@@ -10,6 +10,6 @@ if (checkUserIDPwd($userName, $passWord)) {//checkUserIDPwd為True的話
 	header("Location: todoListView.php");//跳到清單首頁
 } else {
 	$_SESSION['uID']="";
-	header("Location: loginForm.php"); 
+	header("Location: loginForm.php");
 }
 ?>

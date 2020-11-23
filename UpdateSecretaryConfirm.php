@@ -1,6 +1,6 @@
 <?php
 require("todoModel.php");
-// secretary_confirm($id,$result,$secretary_comment,$secretary_name) 
+// secretary_confirm($id,$result,$secretary_comment,$secretary_name)
 $result=mysqli_real_escape_string($conn,$_POST['result']);//取得表單資訊
 $secretary_comment=mysqli_real_escape_string($conn,$_POST['secretary_comment']);
 $secretary_name=mysqli_real_escape_string($conn,$_POST['secretary_name']);
@@ -12,5 +12,5 @@ if ($secretary_name) { //if title is not empty
 } else {
 	$msg= "秘書未確認";
 }
-header("Location: todoListView.php?m=$msg");
+header("Location: secretaryView.php?m=$msg");
 ?>

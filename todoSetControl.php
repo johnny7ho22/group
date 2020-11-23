@@ -13,12 +13,11 @@ if ($msgID>0) {
 		case 'reject':
 			rejectJob($msgID);
 			break;
-		case 'close':
-			setClosed($msgID);
-			break;
+		// case 'close':
+		// 	setClosed($msgID);
+		// 	break;
 		case 'cancel':
 			cancelJob($msgID);
-	
 			break;
 		default:
 			$msg="Invalid action. Ignored.";

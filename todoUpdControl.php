@@ -15,5 +15,5 @@ if ($name) { //if title is not empty
 } else {
 	$msg= "Message title cannot be empty";
 }
-header("Location: todoListView.php?m=$msg");
+header("Location: studentView.php?m=$msg");
 ?>

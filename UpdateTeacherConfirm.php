@@ -11,5 +11,5 @@ if ($teacher_name) { //if title is not empty
 } else {
 	$msg= "導師未確認";
 }
-header("Location: todoListView.php?m=$msg");
+header("Location: teacherView.php?m=$msg");
 ?>
