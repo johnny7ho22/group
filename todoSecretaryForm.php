@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']!="secretary") {
+if (! isset($_SESSION['uID']) or $_SESSION['uID']!="2") {
 	header("Location: loginForm.php");
-} 
+}
 
 require("todoModel.php");
 

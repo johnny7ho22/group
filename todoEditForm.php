@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']!="student") {
+if (! isset($_SESSION['uID']) or $_SESSION['role']!="0") {
 	header("Location: loginForm.php");
 }
 ?>
@@ -26,7 +26,7 @@ if (! isset($_SESSION['uID']) or $_SESSION['uID']!="student") {
 七、本要點自發布日實施。<br></p>
 <form method="post" action="todoUpdControl.php">
 
-      申請人: <input name="name" type="$username" id="name"/> <br>
+      申請人: <input readonly name="name" type="text" value="<?php echo $_SESSION['uID']; ?>" id="name"/> <br>
 
       學號: <input name="number" type="text" id="number"  /> <br>
 

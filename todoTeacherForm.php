@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']!="teacher") {
+if (! isset($_SESSION['uID']) or $_SESSION['role']!="1") {
 	header("Location: loginForm.php");
-} 
+}
 
 require("todoModel.php");
 
