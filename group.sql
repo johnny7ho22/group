@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2020-11-19 14:16:19
+-- 產生時間： 2020-11-23 19:18:39
 -- 伺服器版本： 10.4.14-MariaDB
--- PHP 版本： 7.4.10
+-- PHP 版本： 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,10 +48,10 @@ CREATE TABLE `apply` (
 --
 
 INSERT INTO `apply` (`id`, `name`, `number`, `father`, `mother`, `type`, `teacher_comment`, `teacher_name`, `result`, `secretary_comment`, `secretary_name`, `principal_name`, `status`) VALUES
-(1, '何政賢', 106213015, '爸', '媽', '低收入戶', '導師的意見', '林書豪', '為低收入戶', '很可憐', '我是秘書', 'chen', '0'),
-(3, '陳', 1062345, '王', '林', '中低收入戶', NULL, NULL, NULL, NULL, NULL, NULL, '0'),
-(4, 'abc', 123, 'qwe', 'sd', '低收入戶', 'ret', 'rte', 'sdf', 'sdff', 'sfds', NULL, '結案'),
-(5, 'zxc', 343, 'sgf', 'fgdf', '低收入戶', NULL, NULL, NULL, NULL, NULL, NULL, '待審核');
+(6, 'pinping', 1233455, 'father', 'mother', '家庭突發因素', '四個人擠一張雙人床', 'XXX', '補助100000', '先買兩張床給他們', '宜家家具', NULL, '結案'),
+(10, 'student', 1233455, 'cioufather', 'cioumother', '中低收入戶', '洗澡沒有熱水器', '我是導師', '補助100000', '很窮 要給錢', '秘書是我', NULL, '決行(已結案)'),
+(11, 'student1', 129310834, 'father', 'mother', '家庭突發因素', '四個人擠一張雙人床', '我是他的導師', '補助100', '很窮 要給錢', '秘書是我', NULL, '決行(已結案)'),
+(12, 'student2', 124245687, 'father', 'mother', '中低收入戶', '洗澡沒有熱水器', '某某某', '補助1002334', '非常需要補助', '宜家家具', NULL, '否決(已結案)');
 
 -- --------------------------------------------------------
 
@@ -62,18 +62,25 @@ INSERT INTO `apply` (`id`, `name`, `number`, `father`, `mother`, `type`, `teache
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `LoginID` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 傾印資料表的資料 `user`
 --
 
-INSERT INTO `user` (`id`, `LoginID`, `password`) VALUES
-(1, 'student', '123'),
-(2, 'teacher', '123'),
-(3, 'secretary', '123'),
-(4, 'principal', '123');
+INSERT INTO `user` (`id`, `LoginID`, `password`, `role`) VALUES
+(1, 'student', '123', 0),
+(2, 'teacher', '123', 1),
+(3, 'secretary', '123', 2),
+(4, 'principal', '123', 3),
+(5, 'pinping', '123', 0),
+(6, 'secret', '123', 2),
+(7, 'Iamateacher', '123', 1),
+(8, 'Iamaprincipal', '123', 3),
+(9, 'student1', '123', 0),
+(10, 'student2', '123', 0);
 
 --
 -- 已傾印資料表的索引
@@ -99,13 +106,13 @@ ALTER TABLE `user`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `apply`
 --
 ALTER TABLE `apply`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
