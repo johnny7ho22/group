@@ -36,7 +36,7 @@ $result=getJobList($bossMode, $_SESSION['uID']);//取得所有工作清單
         <td>秘書審核結果</td>
 	    <td>秘書審核意見</td>
         <td>秘書簽章</td>
-        <td>校長核定</td>
+        <!-- <td>校長核定</td> -->
         <td>狀態</td>
         <td>等待執行動作</td>
 </tr>
@@ -54,7 +54,7 @@ while (	$rs=mysqli_fetch_assoc($result))
 	echo "<td>{$rs['result']}</td>";
 	echo "<td>{$rs['secretary_comment']}</td>";
 	echo "<td>{$rs['secretary_name']}</td>";
-	echo "<td>{$rs['principal_name']}</td>";
+	// echo "<td>{$rs['principal_name']}</td>";
 	echo "<td>{$rs['status']}</td>";
 	switch($bossMode)
 	{
